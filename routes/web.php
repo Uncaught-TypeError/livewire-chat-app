@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Livewire\Chat\CreateChat;
+use App\Livewire\Chat\Main;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,6 +18,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+//Livewire
+Route::middleware('auth')->group(function () {
+    Route::get('/users', CreateChat::class)->name('users');
+    Route::get('/chat{key?}', Main::class)->name('chat');
 });
 
 Route::get('/dashboard', function () {
